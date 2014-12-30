@@ -1,0 +1,4 @@
+libusb is a library for USB device access from Linux, Mac OS X, Windows,
+OpenBSD/NetBSD and Haiku userspace.  It is written in C (Haiku backend in C++)
+and licensed under the GNU Lesser General Public License version 2.1 or, at
+your option, any later version.
