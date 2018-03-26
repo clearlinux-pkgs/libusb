@@ -1,5 +1,3 @@
-Configure miss: i686-generic-linux-gnu-objdump
-Configure miss: i686-generic-linux-gnu-dlltool
-Configure miss: i686-generic-linux-gnu-strip
-Configure miss: i686-generic-linux-gnu-mt
+Configure miss: library containing clock_gettime2
 Configure miss: i686-generic-linux-gnu-windres
+Configure miss: library containing clock_gettime2
