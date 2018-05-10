@@ -4,7 +4,7 @@
 #
 Name     : libusb
 Version  : 1.0.22
-Release  : 20
+Release  : 21
 URL      : https://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.22/libusb-1.0.22.tar.bz2
 Source0  : https://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.22/libusb-1.0.22.tar.bz2
 Summary  : C API for USB device access from Linux, Mac OS X, Windows, OpenBSD/NetBSD and Solaris userspace
