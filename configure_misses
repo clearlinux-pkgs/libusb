@@ -1,3 +1,5 @@
+Configure miss: windres
 Configure miss: library containing clock_gettime2
 Configure miss: i686-generic-linux-gnu-windres
+Configure miss: windres
 Configure miss: library containing clock_gettime2

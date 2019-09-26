@@ -4,13 +4,14 @@
 #
 Name     : libusb
 Version  : 1.0.22
-Release  : 22
+Release  : 23
 URL      : https://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.22/libusb-1.0.22.tar.bz2
 Source0  : https://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.22/libusb-1.0.22.tar.bz2
 Summary  : C API for USB device access from Linux, Mac OS X, Windows, OpenBSD/NetBSD and Solaris userspace
 Group    : Development/Tools
 License  : LGPL-2.0+ LGPL-2.1
-Requires: libusb-lib
+Requires: libusb-lib = %{version}-%{release}
+Requires: libusb-license = %{version}-%{release}
 BuildRequires : gcc-dev32
 BuildRequires : gcc-libgcc32
 BuildRequires : gcc-libstdc++32
@@ -28,8 +29,9 @@ your option, any later version.
 %package dev
 Summary: dev components for the libusb package.
 Group: Development
-Requires: libusb-lib
-Provides: libusb-devel
+Requires: libusb-lib = %{version}-%{release}
+Provides: libusb-devel = %{version}-%{release}
+Requires: libusb = %{version}-%{release}
 
 %description dev
 dev components for the libusb package.
@@ -38,8 +40,8 @@ dev components for the libusb package.
 %package dev32
 Summary: dev32 components for the libusb package.
 Group: Default
-Requires: libusb-lib32
-Requires: libusb-dev
+Requires: libusb-lib32 = %{version}-%{release}
+Requires: libusb-dev = %{version}-%{release}
 
 %description dev32
 dev32 components for the libusb package.
@@ -48,6 +50,7 @@ dev32 components for the libusb package.
 %package lib
 Summary: lib components for the libusb package.
 Group: Libraries
+Requires: libusb-license = %{version}-%{release}
 
 %description lib
 lib components for the libusb package.
@@ -56,9 +59,18 @@ lib components for the libusb package.
 %package lib32
 Summary: lib32 components for the libusb package.
 Group: Default
+Requires: libusb-license = %{version}-%{release}
 
 %description lib32
 lib32 components for the libusb package.
+
+
+%package license
+Summary: license components for the libusb package.
+Group: Default
+
+%description license
+license components for the libusb package.
 
 
 %prep
@@ -71,33 +83,42 @@ popd
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1522108185
-export CFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
-export CXXFLAGS="$CXXFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1569536836
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
+export FCFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
+export FFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
+export CXXFLAGS="$CXXFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
 %configure --disable-static
 make
 
 pushd ../build32/
 export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
-export CFLAGS="$CFLAGS -m32"
-export CXXFLAGS="$CXXFLAGS -m32"
-export LDFLAGS="$LDFLAGS -m32"
+export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
+export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32 -mstackrealign"
+export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32 -mstackrealign"
+export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32 -mstackrealign"
 %configure --disable-static    --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
 make
 popd
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 check
+cd ../build32;
+make VERBOSE=1 V=1 check || :
 
 %install
-export SOURCE_DATE_EPOCH=1522108185
+export SOURCE_DATE_EPOCH=1569536836
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/libusb
+cp COPYING %{buildroot}/usr/share/package-licenses/libusb/COPYING
 pushd ../build32/
 %make_install32
 if [ -d  %{buildroot}/usr/lib32/pkgconfig ]
@@ -133,3 +154,7 @@ popd
 %defattr(-,root,root,-)
 /usr/lib32/libusb-1.0.so.0
 /usr/lib32/libusb-1.0.so.0.1.0
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/libusb/COPYING
