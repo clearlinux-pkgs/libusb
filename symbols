@@ -56,6 +56,7 @@ libusb-1.0.so.0:libusb_handle_events_timeout
 libusb-1.0.so.0:libusb_handle_events_timeout_completed
 libusb-1.0.so.0:libusb_has_capability
 libusb-1.0.so.0:libusb_hotplug_deregister_callback
+libusb-1.0.so.0:libusb_hotplug_get_user_data
 libusb-1.0.so.0:libusb_hotplug_register_callback
 libusb-1.0.so.0:libusb_init
 libusb-1.0.so.0:libusb_interrupt_event_handler
@@ -73,6 +74,7 @@ libusb-1.0.so.0:libusb_set_auto_detach_kernel_driver
 libusb-1.0.so.0:libusb_set_configuration
 libusb-1.0.so.0:libusb_set_debug
 libusb-1.0.so.0:libusb_set_interface_alt_setting
+libusb-1.0.so.0:libusb_set_log_cb
 libusb-1.0.so.0:libusb_set_option
 libusb-1.0.so.0:libusb_set_pollfd_notifiers
 libusb-1.0.so.0:libusb_setlocale
@@ -85,3 +87,4 @@ libusb-1.0.so.0:libusb_unlock_event_waiters
 libusb-1.0.so.0:libusb_unlock_events
 libusb-1.0.so.0:libusb_unref_device
 libusb-1.0.so.0:libusb_wait_for_event
+libusb-1.0.so.0:libusb_wrap_sys_device
