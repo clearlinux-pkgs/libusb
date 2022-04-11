@@ -1,3 +1,7 @@
-Configure miss: windres
+Configure miss: UMOCKDEV
+Configure miss: UMOCKDEV
+Configure miss: UMOCKDEV_HOTPLUG
+Configure miss: UMOCKDEV_HOTPLUG
 Configure miss: i686-generic-linux-gnu-windres
+Configure miss: windres
 Configure miss: windres
