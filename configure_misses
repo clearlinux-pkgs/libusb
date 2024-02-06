@@ -1,7 +1,13 @@
-Configure miss: UMOCKDEV
-Configure miss: UMOCKDEV
-Configure miss: UMOCKDEV_HOTPLUG
-Configure miss: UMOCKDEV_HOTPLUG
+Configure miss: g++ option to enable C++11 features
+Configure miss: g++ option to enable C++11 features
+Configure miss: gcc options needed to detect all undeclared functions
+Configure miss: gcc options needed to detect all undeclared functions
+Configure miss: i686-generic-linux-gnu-file
 Configure miss: i686-generic-linux-gnu-windres
+Configure miss: umockdev-1.0 >= 0.16.0
+Configure miss: umockdev-1.0 >= 0.16.0
+Configure miss: umockdev-1.0 >= 0.17.7
+Configure miss: umockdev-1.0 >= 0.17.7
 Configure miss: windres
 Configure miss: windres
+Configure miss: x86_64-generic-linux-gnu-file
